@@ -28,10 +28,10 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i private_key ${USERNAME}@${HOST} '
           if [ -d "${DIRECTORY}/.git" ]; then
             cd ${DIRECTORY} &&
-            git checkout ${BRANCH} &&
-            git reset --hard origin/${BRANCH} &&
-            git pull origin ${BRANCH}
+            git checkout master &&
+            git reset --hard origin/master &&
+            git pull origin master
           else
-            git clone https://github.com/balaji256001/gu.git ${DIRECTORY} -b ${BRANCH} 
+            git clone https://github.com/balaji256001/gu.git ${DIRECTORY} -b master
           fi'
 
