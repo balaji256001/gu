@@ -21,7 +21,7 @@ jobs:
             PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
             HOST: 44.202.19.252
             USERNAME: ubuntu
-            DIRECTORY: var/www/html
+            DIRECTORY: var/www/html/wp-content/themes
             BRANCH: main
         run: |
           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
@@ -32,7 +32,7 @@ jobs:
             git reset --hard origin/${BRANCH} &&
             git pull origin ${BRANCH}
           else
-            git clone https://github.com/your-username/your-repo.git ${DIRECTORY} &&
+            git clone https://github.com/balaji256001/gu.git ${DIRECTORY} &&
             cd ${DIRECTORY} &&
             git checkout ${BRANCH}
           fi'
