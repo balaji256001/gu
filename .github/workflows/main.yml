@@ -26,7 +26,14 @@ jobs:
         run: |
           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
           ssh -o StrictHostKeyChecking=no -i private_key ${USERNAME}@${HOST} '
-              cd ${DIRECTORY} &&
-              git checkout ${BRANCH} &&
-              git reset --hard origin/${BRANCH} &&
-              git pull origin ${BRANCH}'
+          if [ -d "${DIRECTORY}/.git" ]; then
+            cd ${DIRECTORY} &&
+            git checkout ${BRANCH} &&
+            git reset --hard origin/${BRANCH} &&
+            git pull origin ${BRANCH}
+          else
+            git clone https://github.com/your-username/your-repo.git ${DIRECTORY} &&
+            cd ${DIRECTORY} &&
+            git checkout ${BRANCH}
+          fi'
+
