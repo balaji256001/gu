@@ -32,8 +32,6 @@ jobs:
             git reset --hard origin/${BRANCH} &&
             git pull origin ${BRANCH}
           else
-            git clone https://github.com/balaji256001/gu.git ${DIRECTORY} &&
-            cd ${DIRECTORY} &&
-            git checkout ${BRANCH}
+            git clone https://github.com/balaji256001/gu.git ${DIRECTORY} -b ${BRANCH} 
           fi'
 
