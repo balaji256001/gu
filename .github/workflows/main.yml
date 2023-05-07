@@ -32,6 +32,7 @@ jobs:
             git reset --hard origin/master &&
             git pull origin master
           else
-            git clone https://github.com/balaji256001/gu.git ${DIRECTORY} -b master
+            cd /var/www/html/wp-content/themes
+            git clone https://github.com/balaji256001/gu.git  -b master
           fi'
 
