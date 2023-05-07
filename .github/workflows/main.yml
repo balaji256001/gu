@@ -1,0 +1,32 @@
+name: Git CI/CD
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+jobs:
+  Deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: GitPull
+        env:
+            PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+            HOST: 44.202.19.252
+            USERNAME: ubuntu
+            DIRECTORY: var/www/html
+            BRANCH: main
+        run: |
+          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+          ssh -o StrictHostKeyChecking=no -i private_key ${USERNAME}@${HOST} '
+              cd ${DIRECTORY} &&
+              git checkout ${BRANCH} &&
+              git reset --hard origin/${BRANCH} &&
+              git pull origin ${BRANCH}'
